@@ -1,0 +1,11 @@
+{
+  "presets": [
+    "@babel/preset-env"
+  ],
+  "plugins": [
+    ["./src/babel-plugin-inline-css-modules.js", {
+      "namespace": "super-custom",
+      "sassOptions": {}
+    }]
+  ]
+}
