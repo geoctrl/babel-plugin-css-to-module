@@ -6,14 +6,8 @@ export const cssModules = (strings, ...args) => {
     .join("");
 
   const [id, classNameObject, styles] = evalString.split("||CSS_MODULES||");
-  let s;
-  try {
-    s = JSON.parse(classNameObject);
-  } catch (e) {
-    throw Error("[babel-plugin-inline-css-modules]");
-  }
   if (id && classNameObject && styles) {
-    return { s, css: { styles, id } };
+    return { s: JSON.parse(classNameObject), css: { styles, id } };
   }
   return evalString;
 };

@@ -3,8 +3,7 @@
     "@babel/preset-env"
   ],
   "plugins": [
-    ["./src/babel-plugin-inline-css-modules.js", {
-      "namespace": "super-custom",
+    ["./src/babel-plugin-css-to-module.js", {
       "sassOptions": {}
     }]
   ]

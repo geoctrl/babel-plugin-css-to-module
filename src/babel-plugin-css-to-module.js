@@ -10,9 +10,14 @@ module.exports = function () {
       TaggedTemplateExpression(path, { opts: babelOpts }) {
         let node = path.node;
 
-        const { postcssOptions, sassOptions, ...cssModuleOpts } = babelOpts;
+        const {
+          tagName = "cssModules",
+          postcssPlugins = [],
+          sassOptions,
+          ...cssModuleOpts
+        } = babelOpts;
 
-        if (node.tag.name === "cssModules") {
+        if (node.tag.name === tagName) {
           const strings = node.quasi.quasis;
           let evalString = strings
             .map((item, i) => {
@@ -21,11 +26,6 @@ module.exports = function () {
               }`;
             })
             .join("");
-
-          const plugins = postcssOptions?.plugins || {};
-          const pluginsInit = Object.keys(plugins).map((key) => {
-            return require(key)(plugins[key]);
-          });
 
           if (sassOptions) {
             const sass = require("sass");
@@ -41,11 +41,11 @@ module.exports = function () {
           );
           const encodedEvalString = encodeURIComponent(evalString);
           const encodedPlugins = encodeURIComponent(
-            JSON.stringify(pluginsInit)
+            JSON.stringify(postcssPlugins)
           );
 
           const bufferResponse = child_process.execSync(
-            `node ./src/postcss-css-modules-async-child.js css="${encodedEvalString}" plugins="${encodedPlugins}" opts="${encodedCssModuleOpts}"`
+            `node ./src/async-child.js css="${encodedEvalString}" plugins="${encodedPlugins}" opts="${encodedCssModuleOpts}"`
           );
 
           const { output, classNames } = JSON.parse(bufferResponse.toString());
