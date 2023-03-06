@@ -5,7 +5,7 @@
 ### Description
 
 A babel plugin that transforms css into css-modules using tagged template literals.
-The output is an raw string of data which is parsed using either
+The output is a raw string of data which is parsed using either
 the react hook [use-inline-css-modules]() or any other custom template literal
 tag.
 
@@ -41,7 +41,9 @@ function MyComponent() {
 }
 
 const { styles } = cssModules`
-  background-color: red;
+  .someStyle {
+    background-color: red;
+  }
 `;
 ```
 
@@ -70,6 +72,10 @@ Add plugin to your babel config
   ]
 }
 ```
+
+## Consume
+
+#### Todo: write this out
 
 ## Options
 
