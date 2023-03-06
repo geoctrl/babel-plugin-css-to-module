@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-css-to-module",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "main": "src/babel-plugin-css-to-module.js",
   "license": "MIT",
   "scripts": {

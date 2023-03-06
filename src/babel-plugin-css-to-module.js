@@ -45,7 +45,7 @@ module.exports = function () {
           );
 
           const bufferResponse = child_process.execSync(
-            `node ./src/async-child.js css="${encodedEvalString}" plugins="${encodedPlugins}" opts="${encodedCssModuleOpts}"`
+            `node ${process.cwd()}/node_modules/babel-plugin-css-to-module/src/async-child.js css="${encodedEvalString}" plugins="${encodedPlugins}" opts="${encodedCssModuleOpts}"`
           );
 
           const { output, classNames } = JSON.parse(bufferResponse.toString());
