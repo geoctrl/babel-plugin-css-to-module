@@ -1,4 +1,4 @@
-import { cssModules } from "./css-modules";
+import { cssModules } from "inline-css-modules-react";
 // import "./index-2";
 //
 // let red, other;

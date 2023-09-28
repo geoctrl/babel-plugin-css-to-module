@@ -9,11 +9,14 @@ module.exports = function () {
     visitor: {
       TaggedTemplateExpression(path, { opts: babelOpts }) {
         let node = path.node;
+        const filenameArray = this.file.opts.filename.split("/");
+        const filename = filenameArray[filenameArray.length - 1].split(".")[0];
 
         const {
           tagName = "cssModules",
           postcssPlugins = [],
           sassOptions,
+          pathToAsyncChild = `${process.cwd()}/node_modules/babel-plugin-css-to-module/src`,
           ...cssModuleOpts
         } = babelOpts;
 
@@ -43,9 +46,10 @@ module.exports = function () {
           const encodedPlugins = encodeURIComponent(
             JSON.stringify(postcssPlugins)
           );
+          const encodedName = encodeURIComponent(filename);
 
           const bufferResponse = child_process.execSync(
-            `node ${process.cwd()}/node_modules/babel-plugin-css-to-module/src/async-child.js css="${encodedEvalString}" plugins="${encodedPlugins}" opts="${encodedCssModuleOpts}"`
+            `node ${pathToAsyncChild}/async-child.js css="${encodedEvalString}" plugins="${encodedPlugins}" opts="${encodedCssModuleOpts}" name="${encodedName}"`
           );
 
           const { output, classNames } = JSON.parse(bufferResponse.toString());
