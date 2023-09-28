@@ -88,6 +88,7 @@ module.exports = {
     [
       "babel-plugin-css-to-module",
       {
+        tagName: "customName",
         // options here
       },
     ],
@@ -150,12 +151,6 @@ docs: [sass javascript api](https://sass-lang.com/documentation/js-api/).
 
 **Note:** even if you don't need sass options, you still need to include
 the `sassOptions` property for the sass compiler to run.
-
-### postcssPlugins
-
-`plugins[]`
-
-Postcss plugin passthrough array
 
 ## MIT License
 
